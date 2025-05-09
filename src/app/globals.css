@@ -2,79 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --background: 20 17% 81%; /* #D7CCC8 - Warm Beige/Taupe */
+    --foreground: 17 27% 29%; /* #5D4037 - Deep Brown */
+
+    --card: 20 17% 81%; /* #D7CCC8 */
+    --card-foreground: 17 27% 29%; /* #5D4037 */
+
+    --popover: 20 17% 83%; /* Slightly Lighter Beige for Popovers */
+    --popover-foreground: 17 27% 29%; /* #5D4037 */
+
+    --primary: 17 27% 29%; /* #5D4037 - Deep Brown for primary actions/elements */
+    --primary-foreground: 20 17% 95%; /* Lighter Beige for text on primary elements */
+
+    --secondary: 20 17% 75%; /* Slightly darker beige for secondary elements */
+    --secondary-foreground: 17 27% 29%; /* #5D4037 */
+
+    --muted: 20 17% 88%; /* Lighter beige for muted backgrounds */
+    --muted-foreground: 17 27% 45%; /* Muted brown for text on muted backgrounds */
+
+    --accent: 36 100% 65%; /* #FFB74D - Muted Orange */
+    --accent-foreground: 17 27% 20%; /* Darkest brown for high contrast text on accent */
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+
+    --border: 20 17% 70%; /* Darker beige for borders */
+    --input: 20 17% 70%;
+    --ring: 36 100% 65%; /* Accent color for rings */
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Sidebar variables for potential use with Sidebar component if needed */
+    --sidebar-background: 17 27% 22%; /* Dark Brown base for sidebar */
+    --sidebar-foreground: 20 17% 85%; /* Light Beige text */
+    --sidebar-primary: 36 100% 65%; /* Accent Orange for active/primary items */
+    --sidebar-primary-foreground: 17 27% 15%; /* Very Dark Brown */
+    --sidebar-accent: 17 27% 32%; /* Slightly Lighter Brown for hover */
+    --sidebar-accent-foreground: 20 17% 90%; /* Lighter Beige */
+    --sidebar-border: 17 27% 18%;
+    --sidebar-ring: 36 100% 65%;
   }
+
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --background: 17 27% 15%; /* Very Dark Brown */
+    --foreground: 20 17% 81%; /* Light Beige */
+
+    --card: 17 27% 20%; /* Dark Brown */
+    --card-foreground: 20 17% 81%;
+
+    --popover: 17 27% 20%;
+    --popover-foreground: 20 17% 81%;
+
+    --primary: 36 100% 65%; /* Accent Orange as primary in dark */
+    --primary-foreground: 17 27% 10%; /* Darkest Brown */
+
+    --secondary: 17 27% 25%; /* Slightly lighter brown */
+    --secondary-foreground: 20 17% 81%;
+
+    --muted: 17 27% 30%;
+    --muted-foreground: 20 17% 65%;
+
+    --accent: 36 100% 70%; /* Slightly brighter orange for dark */
+    --accent-foreground: 17 27% 10%;
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --border: 17 27% 25%;
+    --input: 17 27% 25%;
+    --ring: 36 100% 65%;
+    
+    /* Dark Sidebar */
+    --sidebar-background: 17 27% 10%; 
+    --sidebar-foreground: 20 17% 85%;
+    --sidebar-primary: 36 100% 65%;
+    --sidebar-primary-foreground: 17 27% 5%;
+    --sidebar-accent: 17 27% 20%;
+    --sidebar-accent-foreground: 20 17% 90%;
+    --sidebar-border: 17 27% 15%;
+    --sidebar-ring: 36 100% 65%;
   }
 }
 
@@ -84,5 +91,10 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+    /* Default to serif, sans-serif can be applied with utility class font-sans */
+    font-family: var(--font-lora), serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans;
   }
 }
