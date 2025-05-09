@@ -33,6 +33,8 @@ const prompt = ai.definePrompt({
   output: {schema: GenerateCoverLetterOutputSchema},
   prompt: `You are an expert career advisor. Generate a compelling cover letter based on the tailored resume and job description provided.
 
+Important: The cover letter MUST mention that the applicant found the job posting on the company's official careers website. Integrate this information naturally within the letter, perhaps in the opening or when expressing interest in the role.
+
 Tailored Resume:
 {{{tailoredResume}}}
 

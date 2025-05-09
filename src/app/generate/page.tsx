@@ -52,7 +52,7 @@ export default function GeneratePage() {
       };
       const result: TailorResumeOutput = await tailorResume(input);
       setTailoredResumeResult(result.tailoredResume);
-      toast({ title: "Resume Tailored!", description: "Your resume has been successfully tailored." });
+      // toast({ title: "Resume Tailored!", description: "Your resume has been successfully tailored." });
     } catch (e: any) {
       console.error("Error tailoring resume:", e);
       setError(`Failed to tailor resume: ${e.message}`);
@@ -79,7 +79,7 @@ export default function GeneratePage() {
       };
       const result: GenerateCoverLetterOutput = await generateCoverLetter(input);
       setCoverLetterResult(result.coverLetter);
-      toast({ title: "Cover Letter Generated!", description: "Your cover letter has been successfully generated." });
+      // toast({ title: "Cover Letter Generated!", description: "Your cover letter has been successfully generated." });
     } catch (e: any) {
       console.error("Error generating cover letter:", e);
       setError(`Failed to generate cover letter: ${e.message}`);
