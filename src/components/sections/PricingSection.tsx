@@ -25,7 +25,7 @@ export default function PricingSection() {
             </CardHeader>
             <CardContent className="text-center">
               <div className="my-6">
-                <span className="text-5xl font-bold font-sans text-accent">$1.00</span>
+                <span className="text-5xl font-bold font-sans text-accent">$1</span>
                 <span className="text-muted-foreground"> / generation</span>
               </div>
               <ul className="space-y-2 text-left text-foreground mb-8">
@@ -66,3 +66,4 @@ export default function PricingSection() {
     </section>
   );
 }
+
