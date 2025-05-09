@@ -25,7 +25,7 @@ export default function PricingSection() {
             </CardHeader>
             <CardContent className="text-center">
               <div className="my-6">
-                <span className="text-5xl font-bold font-sans text-accent">$0.50</span>
+                <span className="text-5xl font-bold font-sans text-accent">$1.00</span>
                 <span className="text-muted-foreground"> / generation</span>
               </div>
               <ul className="space-y-2 text-left text-foreground mb-8">
@@ -48,6 +48,10 @@ export default function PricingSection() {
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-green-500 mr-2 shrink-0" />
                   Easy Copy-to-Clipboard
+                </li>
+                 <li className="flex items-center">
+                  <CheckIcon className="h-5 w-5 text-green-500 mr-2 shrink-0" />
+                  Editable Output
                 </li>
               </ul>
             </CardContent>

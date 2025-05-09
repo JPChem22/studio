@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Loader2, AlertCircle, Sparkles, FileText, Mail } from 'lucide-react';
+import { Loader2, AlertCircle, Sparkles, FileText, Mail, Edit3 } from 'lucide-react';
 import { tailorResume, TailorResumeInput, TailorResumeOutput } from '@/ai/flows/tailor-resume';
 import { generateCoverLetter, GenerateCoverLetterInput, GenerateCoverLetterOutput } from '@/ai/flows/generate-cover-letter';
 import { useToast } from "@/hooks/use-toast";
@@ -26,6 +26,8 @@ type FormData = z.infer<typeof formSchema>;
 export default function GeneratePage() {
   const [tailoredResumeResult, setTailoredResumeResult] = useState<string | null>(null);
   const [coverLetterResult, setCoverLetterResult] = useState<string | null>(null);
+  const [editableTailoredResume, setEditableTailoredResume] = useState<string>("");
+  const [editableCoverLetter, setEditableCoverLetter] = useState<string>("");
   const [isLoadingResume, setIsLoadingResume] = useState(false);
   const [isLoadingCoverLetter, setIsLoadingCoverLetter] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,11 +41,23 @@ export default function GeneratePage() {
     },
   });
 
+  useEffect(() => {
+    if (tailoredResumeResult) {
+      setEditableTailoredResume(tailoredResumeResult);
+    }
+  }, [tailoredResumeResult]);
+
+  useEffect(() => {
+    if (coverLetterResult) {
+      setEditableCoverLetter(coverLetterResult);
+    }
+  }, [coverLetterResult]);
+
   const handleTailorResume: SubmitHandler<FormData> = async (data) => {
     setIsLoadingResume(true);
     setError(null);
     setTailoredResumeResult(null);
-    setCoverLetterResult(null); // Reset cover letter if re-tailoring resume
+    setCoverLetterResult(null); 
 
     try {
       const input: TailorResumeInput = {
@@ -52,7 +66,6 @@ export default function GeneratePage() {
       };
       const result: TailorResumeOutput = await tailorResume(input);
       setTailoredResumeResult(result.tailoredResume);
-      // toast({ title: "Resume Tailored!", description: "Your resume has been successfully tailored." });
     } catch (e: any) {
       console.error("Error tailoring resume:", e);
       setError(`Failed to tailor resume: ${e.message}`);
@@ -63,7 +76,7 @@ export default function GeneratePage() {
   };
 
   const handleGenerateCoverLetter = async () => {
-    if (!tailoredResumeResult || !form.getValues("jobDescription")) {
+    if (!editableTailoredResume || !form.getValues("jobDescription")) {
       setError("Tailored resume and job description are required to generate a cover letter.");
       toast({ title: "Missing Information", description: "Please tailor your resume and ensure job description is filled.", variant: "destructive"});
       return;
@@ -74,12 +87,11 @@ export default function GeneratePage() {
 
     try {
       const input: GenerateCoverLetterInput = {
-        tailoredResume: tailoredResumeResult,
+        tailoredResume: editableTailoredResume, // Use editable version
         jobDescription: form.getValues("jobDescription"),
       };
       const result: GenerateCoverLetterOutput = await generateCoverLetter(input);
       setCoverLetterResult(result.coverLetter);
-      // toast({ title: "Cover Letter Generated!", description: "Your cover letter has been successfully generated." });
     } catch (e: any) {
       console.error("Error generating cover letter:", e);
       setError(`Failed to generate cover letter: ${e.message}`);
@@ -99,7 +111,7 @@ export default function GeneratePage() {
           </CardTitle>
           <CardDescription>
             Provide your current resume and the job description for the role you're applying for. Our AI will help you tailor your application!
-             Each generation (resume tailoring or cover letter creation) costs $0.50.
+             Each generation (resume tailoring or cover letter creation) costs $1.00.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -171,12 +183,17 @@ export default function GeneratePage() {
               <FileText className="h-6 w-6 text-accent" />
               Tailored Resume
             </CardTitle>
-            <CardDescription>Your AI-tailored resume is ready. Review it and then generate a cover letter.</CardDescription>
+            <CardDescription>Your AI-tailored resume is ready. Review and edit below, then generate a cover letter.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <Textarea value={tailoredResumeResult} readOnly rows={15} className="bg-muted/30 border-muted-foreground/30" />
+            <Textarea 
+              value={editableTailoredResume} 
+              onChange={(e) => setEditableTailoredResume(e.target.value)}
+              rows={15} 
+              className="bg-background focus:ring-accent focus:border-accent" 
+            />
             <div className="flex flex-col sm:flex-row gap-2">
-                <CopyButton textToCopy={tailoredResumeResult} buttonText="Copy Tailored Resume" className="flex-grow" />
+                <CopyButton textToCopy={editableTailoredResume} buttonText="Copy Tailored Resume" className="flex-grow" />
                 <Button onClick={handleGenerateCoverLetter} disabled={isLoadingCoverLetter || isLoadingResume} className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground flex-grow">
                 {isLoadingCoverLetter ? (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -197,11 +214,16 @@ export default function GeneratePage() {
                 <Mail className="h-6 w-6 text-accent" />
                 Generated Cover Letter
             </CardTitle>
-            <CardDescription>Your AI-generated cover letter. Copy it and use it for your application!</CardDescription>
+            <CardDescription>Your AI-generated cover letter. Review and edit below, then copy it for your application!</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <Textarea value={coverLetterResult} readOnly rows={15} className="bg-muted/30 border-muted-foreground/30" />
-            <CopyButton textToCopy={coverLetterResult} buttonText="Copy Cover Letter" className="w-full" />
+            <Textarea 
+              value={editableCoverLetter} 
+              onChange={(e) => setEditableCoverLetter(e.target.value)}
+              rows={15} 
+              className="bg-background focus:ring-accent focus:border-accent" 
+            />
+            <CopyButton textToCopy={editableCoverLetter} buttonText="Copy Cover Letter" className="w-full" />
           </CardContent>
         </Card>
       )}
