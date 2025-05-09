@@ -70,9 +70,10 @@ Follow these critical instructions for tailoring the resume:
         *   **Task**: Clearly articulate your specific responsibility, goal, or what was required of you in that situation.
         *   **Action**: Detail the specific steps and actions YOU took to address the task or challenge. Start with strong, dynamic action verbs.
         *   **Result**: Quantify the outcomes and impact of your actions whenever possible. Use numbers, percentages, metrics, or specific achievements to demonstrate value.
+    *   The bullet points should naturally integrate these elements without explicitly labeling them as "Situation:", "Task:", "Action:", or "Result:".
     *   **Example Transformation**:
         *   Original: "Responsible for managing social media."
-        *   STAR Method (target format): "Managed 5 corporate social media accounts (Facebook, Twitter, Instagram, LinkedIn, TikTok) [Action], in a fast-paced startup environment facing declining engagement [Situation], tasked with reversing this trend and increasing brand visibility [Task], resulting in a 25% increase in overall engagement and 15% follower growth within 6 months by developing and implementing a data-driven content strategy incorporating A/B tested campaigns and influencer collaborations [Result & further Action detail]."
+        *   STAR Method (target format): "In a fast-paced startup environment facing declining engagement, was tasked with reversing this trend and increasing brand visibility by managing 5 corporate social media accounts (Facebook, Twitter, Instagram, LinkedIn, TikTok); developed and implemented a data-driven content strategy incorporating A/B tested campaigns and influencer collaborations, resulting in a 25% increase in overall engagement and 15% follower growth within 6 months."
     *   If the original resume lacks specific details for a full STAR bullet, use the \`extractRelevantContent\` tool to identify potentially relevant information or, if necessary, make well-reasoned inferences based on the job description and the resume content to construct a plausible and impactful STAR-formatted bullet point. The aim is to make the candidate shine.
 
 4.  **Content Relevance and Keyword Optimization**:
